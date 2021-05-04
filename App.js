@@ -8,6 +8,7 @@ import useTwitchAuthentication from './hooks/useTwitchAuthentication';
 function App() {
   const isAuthenticated = useTwitchAuthentication();
   const [data,setData] = useState([])
+  const [cat,setCat] = useState([])
 
   if (!isAuthenticated) {
     return null;
@@ -16,11 +17,15 @@ function App() {
   function getTop(data){
     setData(data)
   }
+
+  function getCat(cat){
+    setCat(cat)
+  }
   
   return (
     <div className="App">
-      <Navbar setTopGames={getTop}  />
-      <Content passadati={data} />
+      <Navbar setCategories={getCat} setTopGames={getTop}  />
+      <Content passacategorie={cat} passadati={data} />
     </div>
   );
 }

@@ -13,27 +13,32 @@ const Navbar = (props) => {
   const [cat,setCat] = useState([])
 
 
+useEffect(()=>{
   getTopGames({after: '',before: '',first: 10,width: '188',height: '250',})
   .then(response => setData(response.data))
-  
+})
+
   function getTopgames(){
     props.setTopGames(data)
   }
-  
-  function getCategories(){
-    searchCategories({ query: '/' })
-    .then(response => setCat(response.data))
+
+  async function getCategories(){
+    let cate = await searchCategories({ query: '/' })
+    // .then(response => setCat(response.data))
+    setCat(cate.data)
+    getCategoriesInProps()
   }
 
   function getCategoriesInProps(){
-    props.setCategories(data)
+    props.setCategories(cat)
+
   }
 
 
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbar__item}>
-        <a onClick={getCategoriesInProps} href="#">Sfoglia Categorie</a>
+        <a onClick={getCategories} href="#">Sfoglia Categorie</a>
         <a onClick={getTopgames} href="#">Top Games</a>
       </div>
 
