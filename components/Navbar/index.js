@@ -22,15 +22,11 @@ useEffect(()=>{
     props.setTopGames(data)
   }
 
+  searchCategories({ query: '/' })
+  .then(response => setCat(response.data))
+
   function getCategories(){
-    searchCategories({ query: '/' })
-    .then(response => setCat(response.data))
-    getCategoriesInProps()
-  }
-
-  function getCategoriesInProps(){
     props.setCategories(cat)
-
   }
 
 
