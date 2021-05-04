@@ -23,9 +23,8 @@ useEffect(()=>{
   }
 
   async function getCategories(){
-    let cate = await searchCategories({ query: '/' })
-    // .then(response => setCat(response.data))
-    setCat(cate.data)
+    searchCategories({ query: '/' })
+    .then(response => setCat(response.data))
     getCategoriesInProps()
   }
 
