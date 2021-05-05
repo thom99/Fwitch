@@ -1,0 +1,18 @@
+.col-12{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+   
+}
+
+#topgames:hover{
+    transform: translateY(0) scale(1.1);
+}
+
+
+.categorie{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
