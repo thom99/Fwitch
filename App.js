@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { getTopGames } from './api/twitch';
+// import { getTopGames } from './api/twitch';
 import './App.css';
-import Content from './components/Content';
+import Content  from './components/Content';
 import Navbar from './components/Navbar';
 import useTwitchAuthentication from './hooks/useTwitchAuthentication';
+
 
 function App() {
   const isAuthenticated = useTwitchAuthentication();

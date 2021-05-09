@@ -1,44 +1,41 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { getGames, getTopGames, searchCategories } from '../../api/twitch';
 import useProfile from '../../hooks/useProfile';
 import classes from './navbar.module.css';
-import {useState} from 'react'
-
-
-
+import { useState } from 'react'
 
 const Navbar = (props) => {
   const { loading, error, user } = useProfile();
   const [data, setData] = useState([]);
-  const [cat,setCat] = useState([])
- 
+  const [cat, setCat] = useState([])
 
 
-useEffect(()=>{
-  getTopGames({after: '',before: '',first: 10,width: '188',height: '250',})
-  .then(response => setData(response.data))
-})
+  useEffect(() => {
+    getTopGames({ after: '', before: '', first: 10, width: '188', height: '250', })
+      .then(response => setData(response.data))
+  }, [])
 
-  function getTopgames(){
+  function getTopgames() {
     props.setTopGames(data)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     searchCategories({ query: '/' })
-    .then(response => setCat(response.data))
-  })
-  
+      .then(response => setCat(response.data))
+  }, [])
 
-  function getCategories(){
+
+  function getCategories() {
     props.setCategories(cat)
   }
-
 
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbar__item}>
-        <a onClick={getCategories} href="#">Sfoglia Categorie</a>
-        <a onClick={getTopgames} href="#">Top Games</a>
+        <div>
+          <a onClick={getTopgames} href="#">Top Games</a>
+          <a onClick={getCategories} href="#">Sfoglia Categorie</a>
+        </div>
       </div>
 
       <div className={classes.navbar__item}>
