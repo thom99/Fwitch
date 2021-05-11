@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getTopGames } from '../../api/twitch';
-
 import {Link} from "react-router-dom";
-
-
 
 const TopGames = () => {
   const [games, setGames] = useState([]);
@@ -21,17 +18,15 @@ const TopGames = () => {
             games.map((el, index) => {
               return (
                 <div>
-                  <Link to={"/streams/" + el.id}><img id="topgames" key={index} src={el.box_art_url} ></img></Link>
+                  <Link to={"/streams/" + el.id}>
+                    <img id="topgames" key={index} src={el.box_art_url} ></img>
+                  </Link>
                 </div>
               )
             })
           }
-
         </div>
-
-        {/* <Streams passastreams={streams}></Streams> */}
       </div>
-    
   )
 }
 

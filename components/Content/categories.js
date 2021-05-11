@@ -1,32 +1,23 @@
-import React, { useState } from 'react'
-// import { getStreams } from '../../api/twitch';
-import Streams from '../Streams/streams';
-import TopGames from '../Content/topgames'
+import React, { useState,useEffect } from 'react'
+import { searchCategories } from '../../api/twitch';
 
+import {Link} from "react-router-dom";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+const Categories = () => {
+  const [cat, setCat] = useState([])
 
+  useEffect(() => {
+    searchCategories({ query: '/' })
+      .then(response => setCat(response.data))
+  }, [])
 
-const Categories = (props) => {
-  // const [streams, setStreams] = useState([])
-
-  // function getstreams(evento) {
-  //   getStreams({ game_id: evento.target.id, width: '348', height: '196' })
-  //     .then((response) => setStreams(response.data))
-
-  // }
   return (
     
       <div className="row">
 
         <div className="categorie">
           {
-            props.passacategorie.map((el, index) => {
+           cat.map((el, index) => {
               return (
                 <div>
                   <Link to={"/streams/" + el.id}>
@@ -38,14 +29,7 @@ const Categories = (props) => {
           }
         </div>
 
-        <Switch>
-          <Route exact path="/"></Route>
-          <Route path="/topgames" component={TopGames}></Route>
-          <Route path={"/streams/:idstreams"} component={Streams}></Route>
-        </Switch>
-
       </div>
-    
   )
 }
 
