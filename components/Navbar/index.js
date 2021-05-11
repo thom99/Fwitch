@@ -4,6 +4,9 @@ import useProfile from '../../hooks/useProfile';
 import classes from './navbar.module.css';
 import { useState } from 'react'
 
+import {Link} from "react-router-dom";
+
+
 const Navbar = (props) => {
   const { loading, error, user } = useProfile();
   const [data, setData] = useState([]);
@@ -30,27 +33,28 @@ const Navbar = (props) => {
   }
 
   return (
-    <nav className={classes.navbar}>
-      <div className={classes.navbar__item}>
-        <div>
-          <a onClick={getTopgames} href="#">Top Games</a>
-          <a onClick={getCategories} href="#">Sfoglia Categorie</a>
+      <nav className={classes.navbar}>
+        <div className={classes.navbar__item}>
+          <div>
+            <Link to="/topgames" onClick={getTopgames} >Top Games</Link>
+            <Link to="/categories" onClick={getCategories}>Sfoglia Categorie</Link>
+          </div>
         </div>
-      </div>
 
-      <div className={classes.navbar__item}>
-        {!loading ? (
-          <img
-            src={user.profile_image_url}
-            className={classes.avatar}
-            alt="Profile"
-            width={60}
-          />
-        ) : (
-          <div className={classes.avatar} style={{ width: 60, height: 60 }} />
-        )}
-      </div>
-    </nav>
+        <div className={classes.navbar__item}>
+          {!loading ? (
+            <img
+              src={user.profile_image_url}
+              className={classes.avatar}
+              alt="Profile"
+              width={60}
+            />
+          ) : (
+            <div className={classes.avatar} style={{ width: 60, height: 60 }} />
+          )}
+        </div>
+      </nav>
+
   );
 };
 
